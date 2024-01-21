@@ -15,7 +15,7 @@ public struct AudioData
 public class AudioDatabaseController : MonoBehaviour
 {
     [SerializeField]
-    public Dictionary<string, AudioClip> audioDictionary;  
+    public Dictionary<string, AudioClip> audioDictionary = new Dictionary<string, AudioClip>();  
 
 
     // Workarround shit to make memory access better? (i hope)
@@ -33,12 +33,17 @@ public class AudioDatabaseController : MonoBehaviour
     void Start()
     {
         _source = GetComponent<AudioSource>();
+        AssignDataToDictionary();
     }
 
 
     void AssignDataToDictionary()
     {
-
+        foreach (AudioData data in audioDataArray)
+        {
+            audioDictionary.Add(data.key, data.clip);
+            Debug.Log("Added " + data.key + " to database. ");
+        }
     }
 
 
